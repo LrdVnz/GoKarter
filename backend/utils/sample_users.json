@@ -1,0 +1,78 @@
+[
+    {
+      "name": "Mario Rossi",
+      "email": "mario.rossi@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+    {
+      "name": "Luca Bianchi",
+      "email": "luca.bianchi@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/2.jpg"
+    },
+    {
+      "name": "Giulia Verdi",
+      "email": "giulia.verdi@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/1.jpg"
+    },
+    {
+      "name": "Francesca Neri",
+      "email": "francesca.neri@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
+    },
+    {
+      "name": "Matteo Russo",
+      "email": "matteo.russo@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/3.jpg"
+    },
+    {
+      "name": "Sara Moretti",
+      "email": "sara.moretti@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/3.jpg"
+    },
+    {
+      "name": "Andrea Colombo",
+      "email": "andrea.colombo@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/4.jpg"
+    },
+    {
+      "name": "Valentina Gallo",
+      "email": "valentina.gallo@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/4.jpg"
+    },
+    {
+      "name": "Davide Ricci",
+      "email": "davide.ricci@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/5.jpg"
+    },
+    {
+      "name": "Elena Fontana",
+      "email": "elena.fontana@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/5.jpg"
+    },
+    {
+      "name": "Federico Greco",
+      "email": "federico.greco@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/6.jpg"
+    },
+    {
+      "name": "Alessandra De Luca",
+      "email": "alessandra.deluca@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/6.jpg"
+    },
+    {
+      "name": "Giorgio Lombardi",
+      "email": "giorgio.lombardi@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/7.jpg"
+    },
+    {
+      "name": "Chiara Fabbri",
+      "email": "chiara.fabbri@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/7.jpg"
+    },
+    {
+      "name": "Marco Conti",
+      "email": "marco.conti@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/8.jpg"
+    }
+  ]
+  

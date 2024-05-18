@@ -11,8 +11,9 @@ app.use(cors())
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send(data)
+    res.send()
 })
+
 
 async function initServer() {
     try{

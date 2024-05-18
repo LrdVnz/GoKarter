@@ -26,16 +26,12 @@ const NavBar = (props) => {
   } */
 
   return (
-    <Navbar expand="lg" className="blog-navbar" fixed="top">
+    <Navbar expand="lg" className="blog-navbar p-2" fixed="top">
       <Container className="justify-content-between">
-        <Button
-          as={Link}
-          to="/new"
-          className="blog-navbar-add-button bg-dark"
-          size="lg"
-        >
-          Nuovo Articolo
-        </Button>
+          <Navbar.Brand>
+          <h2>GoKarter</h2>
+          </Navbar.Brand>
+        
       </Container>
     </Navbar>
   );

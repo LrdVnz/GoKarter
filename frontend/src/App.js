@@ -7,7 +7,7 @@ function App() {
       <BrowserRouter>
       <NavBar />
         <Routes>
-          <Route path="/" element={<div>Hello world!</div>}/>
+         
         </Routes>
       </BrowserRouter>
     </>
