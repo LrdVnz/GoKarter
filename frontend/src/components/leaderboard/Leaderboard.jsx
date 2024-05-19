@@ -38,8 +38,8 @@ const Leadeboard = () => {
                 users.slice(0, 4).map((user, i) => (
                     <Col 
                     key={`user-${i}`}
-                    md={3}
-                    className="mt-1"
+                   
+                    className="mt-1 g-0"
                     >
                      <User { ...user } />
 

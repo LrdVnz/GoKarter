@@ -7,12 +7,13 @@ const passport = require("passport");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const User = require("./models/User.model");
+const Score = require("./models/Scores.model")
 
 app.use(cors());
 app.use(express.json());
 
 app.get("/", async (req, res) => {
-  let result = await User.find();
+  let result = await Score.find();
   res.send(result);
 });
 
