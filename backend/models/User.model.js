@@ -19,7 +19,7 @@ const userSchema = new Schema(
   },
 
   {
-    collection: "authors",
+    collection: "Users",
   }
 );
 

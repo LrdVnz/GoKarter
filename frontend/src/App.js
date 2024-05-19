@@ -1,5 +1,6 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom"
-import NavBar from "./components/navbar/BlogNavbar";
+import NavBar from "./components/navbar/NavBar";
+import Leadeboard from "./components/leaderboard/Leaderboard";
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       <BrowserRouter>
       <NavBar />
         <Routes>
-         
+         <Route path="/" element={<Leadeboard />} />
         </Routes>
       </BrowserRouter>
     </>
