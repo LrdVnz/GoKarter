@@ -29,7 +29,7 @@ const Leadeboard = () => {
     }
 
     return ( 
-        <Container fluid="sm" className="p-2">
+        <Container fluid="sm" className="p-2 main">
                 {/* UsersRow */}
               { !users && <p> loading </p> }
             <Row >
