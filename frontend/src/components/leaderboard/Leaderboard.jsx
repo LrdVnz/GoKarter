@@ -1,6 +1,7 @@
 import "./styles.css";
 import { Container, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import User from "../user/User";
 
 const Leadeboard = () => {
    
@@ -28,17 +29,19 @@ const Leadeboard = () => {
     }
 
     return ( 
-        <Container>
-            <Row>
+        <Container fluid="sm" className="p-2">
                 {/* UsersRow */}
               { !users && <p> loading </p> }
+            <Row >
 
               { users && 
-                users.map((user, i) => (
-                    <Col
+                users.slice(0, 4).map((user, i) => (
+                    <Col 
                     key={`user-${i}`}
+                    md={3}
+                    className="mt-1"
                     >
-                     Prova
+                     <User { ...user } />
 
                     </Col>
                 ))
