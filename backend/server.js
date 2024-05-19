@@ -13,6 +13,15 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", async (req, res) => {
+  lres.send("success!!")
+});
+
+app.get("/users", async (req, res) => {
+  let result = await User.find();
+  res.send(result);
+});
+
+app.get("/scores", async (req, res) => {
   let result = await Score.find();
   res.send(result);
 });
