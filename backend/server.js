@@ -3,13 +3,12 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const passport = require("passport");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const User = require("./models/User.model");
-const Score = require("./models/Scores.model")
 const userRoute = require("./routes/User.route")
 const scoreRoute = require("./routes/Score.route")
+const lapRoute = require("./routes/Lap.route")
+
 
 app.use(cors());
 
@@ -21,6 +20,7 @@ app.use(express.json());
 
 app.use("/user", userRoute)
 app.use("/score", scoreRoute)
+app.use("/lap", lapRoute)
 
 async function initServer() {
   try {

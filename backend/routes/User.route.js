@@ -13,13 +13,13 @@ userRoute.get("/", async (req, res) => {
 });
 
 userRoute.post("/", async (req, res) => {
-  try {
-    let user = await User.create(req.body);
-    console.log(user);
-    res.send(user).status(201);
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-module.exports = userRoute;
+    try {
+      let user = await User.create(req.body);
+      console.log(user);
+      res.send(user).status(201);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+  
+  module.exports = userRoute;
