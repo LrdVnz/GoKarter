@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", async (req, res) => {
-  lres.send("success!!")
+  res.send("success!!")
 });
 
 app.get("/users", async (req, res) => {
