@@ -1,6 +1,6 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 require("dotenv").config();
-const Author = require("../models/author.model.js");
+const Author = require("../services/models/author.model.js");
 const jwt = require("jsonwebtoken")
 
 function createToken(author, id) {

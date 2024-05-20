@@ -5,10 +5,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const userRoute = require("./routes/User.route")
-const scoreRoute = require("./routes/Score.route")
-const lapRoute = require("./routes/Lap.route")
-
+const userRoute = require("./services/routes/User.route")
+const scoreRoute = require("./services/routes/Score.route")
+const lapRoute = require("./services/routes/Lap.route")
 
 app.use(cors());
 
