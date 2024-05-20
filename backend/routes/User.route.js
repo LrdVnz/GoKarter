@@ -1,5 +1,4 @@
 const express = require("express");
-const data = require("../../src/data/posts.json");
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -13,3 +12,14 @@ userRoute.get("/", async (req, res) => {
   res.send(result);
 });
 
+userRoute.post("/", async (req, res) => {
+  try {
+    let user = await User.create(req.body);
+    console.log(user);
+    res.send(user).status(201);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+module.exports = userRoute;
