@@ -1,25 +1,12 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 require("dotenv").config();
-const Author = require("../services/models/author.model.js");
+const User = require("../models/User.model");
 const jwt = require("jsonwebtoken")
 
-function createToken(author, id) {
-    const authorPayload = {
-      author: author,
-    };
-
-    console.log("il payload passato nel jwt sign : ")
-    console.log(authorPayload)
-    const accessToken = jwt.sign(authorPayload, process.env.ACCESS_TOKEN_SECRET);
-    console.log("-------------------------------------")
-
-    return accessToken;
-  }  
-
 const options = {
-  clientID: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: process.env.REACT_APP_BACKEND_URL + process.env.CB,
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: process.env.GOOGLE_CB,
 };
 
 const googleStrategy = new GoogleStrategy(
@@ -27,20 +14,17 @@ const googleStrategy = new GoogleStrategy(
   async (_accessToken, _refreshToken, profile, passportNext) => {
     try {
       const { email, given_name, family_name, sub, picture } = profile._json;
-      
-      console.log("picture è ????")
-      console.log(picture)
-      console.log("-------------------")
-      const author = await Author.findOne({ email });
+     
+      const user = await User.findOne({ email });
 
-      if (author) {
+      if (user) {
         const accToken = createToken({
-          _id: author._id,
+          _id: user._id,
         });
-
-       passportNext(null, { accToken });
+        
+        passportNext(null, { accToken });
       } else {
-       const newAuthor = new Author({
+        const newUser = new User({
           name: given_name,
           lastName: family_name,
           email: email, 
@@ -49,16 +33,16 @@ const googleStrategy = new GoogleStrategy(
         });
 
         console.log("il nuovo autore che viene creato : ")
-        console.log(newAuthor)
+        console.log(newUser)
         console.log("--------------------------------- ")
-
-        await newAuthor.save();
-
-         const accToken = createToken({
-          name: newAuthor.name,
-          _id: newAuthor._id 
+        
+        await newUser.save();
+        
+        const accToken = createToken({
+          name: newUser.name,
+          _id: newUser._id 
         });
-
+        
         passportNext(null, { accToken });
       }
     } catch (error) {
@@ -66,5 +50,18 @@ const googleStrategy = new GoogleStrategy(
     }
   }
 );
+
+function createToken(user, id) {
+    const userPayload = {
+      user: user,
+    };
+
+    console.log("il payload passato nel jwt sign : ")
+    console.log(userPayload)
+    const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET);
+    console.log("-------------------------------------")
+
+    return accessToken;
+  }  
 
 module.exports = googleStrategy; 

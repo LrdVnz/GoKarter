@@ -12,14 +12,33 @@ userRoute.get("/", async (req, res) => {
   res.send(result);
 });
 
-userRoute.post("/", async (req, res) => {
+userRoute.get(
+  "/googleLogin",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+userRoute.get(
+  "/callback",
+  passport.authenticate("google", { session: false }),
+  (req, res, next) => {
     try {
-      let user = await User.create(req.body);
-      console.log(user);
-      res.send(user).status(201);
-    } catch (err) {
-      console.log(err);
+      res.redirect(
+        `${process.env.BACKEND_URL}/user/profile?accessToken=${req.user.accToken}`
+      );
+    } catch (error) {
+      next(error);
     }
-  });
-  
-  module.exports = userRoute;
+  }
+);
+
+userRoute.post("/", async (req, res) => {
+  try {
+    let user = await User.create(req.body);
+    console.log(user);
+    res.send(user).status(201);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+module.exports = userRoute;

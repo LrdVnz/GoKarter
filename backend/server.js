@@ -8,14 +8,18 @@ const PORT = process.env.PORT || 3000;
 const userRoute = require("./services/routes/User.route")
 const scoreRoute = require("./services/routes/Score.route")
 const lapRoute = require("./services/routes/Lap.route")
+const passport = require("passport")
+const googleStrategy = require("./services/middlewares/passport")
 
 app.use(cors());
+app.use(express.json());
+
+passport.use("google", googleStrategy);
 
 app.get("/", async (req, res) => {
   res.send("success!!")
 });
 
-app.use(express.json());
 
 app.use("/user", userRoute)
 app.use("/score", scoreRoute)
