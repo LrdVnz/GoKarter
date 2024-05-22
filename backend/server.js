@@ -20,7 +20,6 @@ app.get("/", async (req, res) => {
   res.send("success!!")
 });
 
-
 app.use("/user", userRoute)
 app.use("/score", scoreRoute)
 app.use("/lap", lapRoute)

@@ -31,6 +31,23 @@ userRoute.get(
   }
 );
 
+userRoute.get("/profile", async (req, res) => {
+  try {
+    let currentUser = await User.findById(req.user.user._id);
+
+    currentUser = JSON.stringify(currentUser);
+
+    let authToken = req.query.accessToken;
+/* 
+da fare pagina frontend per prendere dati del login google
+    res.redirect(
+      `${process.env.REACT_APP_FRONTEND_URL}/googleLogin?currentUser=${currentUser}&authToken=${authToken}`
+    ); */
+  } catch (err) {
+    res.send(err);
+  }
+});
+
 userRoute.post("/", async (req, res) => {
   try {
     let user = await User.create(req.body);
