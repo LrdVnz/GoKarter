@@ -10,7 +10,7 @@ require("dotenv").config();
 
 const userRoute = express.Router();
 
-userRoute.get("/", async (req, res) => {
+userRoute.get("/", verifyToken, async (req, res) => {
   let result = await User.find();
   res.send(result);
 });
@@ -85,5 +85,28 @@ userRoute.post("/register", uploadAvatar, async (req, res) => {
   }
 });
 
+userRoute.post("/login", async (req, res) => {
+  const user = await User.findOne({ name: req.body.name });
+  if (user == null) {
+    res.send("user not found");
+  }
+  if (bcrypt.compare(req.body.password, user.password)) {
+    const accessToken = createToken(user);
+    res.json({ accessToken: accessToken, user: user });
+  } else {
+    res.send("you typed the wrong password");
+  }
+});
+
+function createToken(author) {
+  const authorPayload = {
+    author: author,
+  };
+
+  const accessToken = jwt.sign(authorPayload, process.env.ACCESS_TOKEN_SECRET);
+  
+  return accessToken;
+}
 
 module.exports = userRoute;
+
