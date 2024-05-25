@@ -12,6 +12,11 @@ raceRoute.get("/", async (req, res) => {
   res.send(result);
 });
 
+raceRoute.get("/:id", async (req, res) => {
+  let result = await Race.findById(req.params.id).populate("users.user");
+  res.send(result);
+});
+
 raceRoute.post("/", async (req, res) => {
   try {
     let race = await Race.create(req.body);

@@ -48,19 +48,15 @@ const Frontpage = (props) => {
               marginBottom: 50,
             }}
           >
-            {/*  <RaceItem key={race.title} {...race} /> */}
+            {/* To do : put the race in a card */}
             {/* Race item is clickable and bring you to the race. */}
             <div>{race.date}</div>
             <div> partecipants :</div>
             <ul>
-              { race.users.map(
-                (user, a) => 
-                    (
-                /* per accedere al nome user[0].user.name */
-                <li key={`user-${a}`}>{ user[0].user.email}</li>
-              )
-            )
-              }
+              {race.users.map((user, a) => (
+                /* per accedere al nome : user[0].user.name */
+                <li key={`user-${a}`}>{user[0].user.name}</li>
+              ))}
             </ul>
           </Col>
         ))}

@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import NavBar from "./components/navbar/NavBar";
 import Leadeboard from "./components/leaderboard/Leaderboard";
-import Frontpage from "./components/frontpage/frontpage";
+import Frontpage from "./components/frontpage/Frontpage";
 
 function App() {
   return (
