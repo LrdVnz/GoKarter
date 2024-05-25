@@ -51,16 +51,6 @@ da fare pagina frontend per prendere dati del login google
   }
 });
 
-userRoute.post("/", async (req, res) => {
-  try {
-    let user = await User.create(req.body);
-    console.log(user);
-    res.send(user).status(201);
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 userRoute.post("/register", uploadAvatar, async (req, res) => {
   try {
     

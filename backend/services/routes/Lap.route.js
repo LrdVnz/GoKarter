@@ -8,18 +8,18 @@ require("dotenv").config();
 const lapRoute = express.Router();
 
 lapRoute.get("/", async (req, res) => {
-  let result = await Lap.find();
+  let result = await Lap.find().populate("race").populate("user");
   res.send(result);
 });
 
 lapRoute.post("/", async (req, res) => {
-    try {
-      let lap = await Lap.create(req.body);
-      console.log(lap);
-      res.send(lap).status(201);
-    } catch (err) {
-      console.log(err);
-    }
-  });
-  
-  module.exports = lapRoute;
+  try {
+    let lap = await Lap.create(req.body);
+    console.log(lap);
+    res.send(lap).status(201);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+module.exports = lapRoute;

@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const userRoute = require("./services/routes/User.route")
-const scoreRoute = require("./services/routes/Score.route")
+const raceRoute = require("./services/routes/Race.route")
 const lapRoute = require("./services/routes/Lap.route")
 const passport = require("passport")
 const googleStrategy = require("./services/middlewares/passport")
@@ -21,7 +21,7 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/user", userRoute)
-app.use("/score", scoreRoute)
+app.use("/race", raceRoute)
 app.use("/lap", lapRoute)
 
 async function initServer() {
