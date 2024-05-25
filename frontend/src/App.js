@@ -1,6 +1,7 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import NavBar from "./components/navbar/NavBar";
 import Leadeboard from "./components/leaderboard/Leaderboard";
+import Frontpage from "./components/frontpage/frontpage";
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
       <BrowserRouter>
       <NavBar />
         <Routes>
-         <Route path="/" element={<Leadeboard />} />
+         <Route path="/" element={<Frontpage />} />
+         <Route path="/race/:id" element={<Leadeboard />} />
         </Routes>
       </BrowserRouter>
     </>
