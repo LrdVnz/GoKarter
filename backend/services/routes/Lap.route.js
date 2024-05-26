@@ -12,6 +12,13 @@ lapRoute.get("/", async (req, res) => {
   res.send(result);
 });
 
+lapRoute.get("/:id", async (req, res) => {
+  let result = await Lap.find({
+    race: req.params.id,
+  })
+  res.send(result);
+});
+
 lapRoute.post("/", async (req, res) => {
   try {
     let lap = await Lap.create(req.body);
