@@ -1,17 +1,37 @@
 import "./styles.css";
 import { Container, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import User from "../user/User";
+import { useParams } from "react-router-dom";
 
 const Leadeboard = () => {
   const [users, setUsers] = useState();
   const [isError, setIsError] = useState();
-  const [scores, setScores] = useState();
+  const [race, setRace] = useState();
+
+  const params = useParams();
+  const { id } = params;
 
   useEffect(() => {
-    getUsers();
-    getScores();
+    /*  getUsers();
+    getScores(); */
+    getRace();
+    console.log(race);
   }, []);
+
+  async function getRace() {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/race/${id}`);
+      // Per ora senza autorizzazione
+
+      const json = await res.json();
+
+      if (json) {
+        setRace(json);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   async function getUsers() {
     try {
@@ -28,25 +48,18 @@ const Leadeboard = () => {
     }
   }
 
-  async function getScores() {
-    try {
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/scores`);
-      // Per ora senza autorizzazione
-
-      const json = await res.json();
-
-      if (json) {
-        setScores(json);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   return (
     <Container fluid="sm" className="p-2 main">
       {/* UsersRow */}
-      {!users && <p> loading </p>}
+      {/* Da rifare. Prendere i giri raggruppandoli per utenti in questa gara. */}
+    </Container>
+  );
+};
+
+export default Leadeboard;
+
+{
+  /*  {!users && <p> loading </p>}
       <Row>
         {users &&
           users.slice(0, 4).map((user, i) => (
@@ -63,9 +76,5 @@ const Leadeboard = () => {
               <p>{i === 1 && "lap1: " + score.lap1 }</p>
             </Row>
           ))}
-      </Row>
-    </Container>
-  );
-};
-
-export default Leadeboard;
+      </Row> */
+}
