@@ -17,7 +17,6 @@ const Leaderboard = () => {
   useEffect(() => {
     getRace();
     getLaps();
-    createUserData()
   }, []);
 
   useEffect(() => {
@@ -25,6 +24,10 @@ const Leaderboard = () => {
       setUsers(race["users"]);
     }
   }, [race]);
+
+  useEffect(() => {
+    createUserData();
+  }, [users]);
 
   async function getRace() {
     try {
@@ -69,10 +72,10 @@ const Leaderboard = () => {
       users.forEach((current_user, index) => {
         let currentObject = {
           laps: [],
-          user: {}
+          user: {},
         };
 
-         let currentId = current_user["user"]["_id"];
+        let currentId = current_user["user"]["_id"];
 
         let userLaps = laps.filter((lap, a) => {
           if (lap["user"]["_id"] === currentId) {
@@ -81,21 +84,31 @@ const Leaderboard = () => {
         });
 
         currentObject.laps = userLaps;
+        currentObject.user = current_user["user"];
         userDataArr[`${currentId}`] = currentObject;
       });
+      console.log(userDataArr);
       setUserData(userDataArr);
     }
   }
 
+  {
+   /*  userData &&
+      Object.keys(userData).forEach((item) => {
+        console.log(userData[item].user);
+      }); */
+  }
   return (
     <Container fluid="sm" className="p-2 main">
       <Row>
-        {users &&
-          users.map((user, i) => (
+        {userData &&
+          Object.keys(userData).map((user, i) => (
             <Col key={`user-${i}`} className="mt-1 g-0">
-              <User {...user.user} />
+              <User {...userData[`${user}`]["user"]} />
               <Row>
-                <Col></Col>
+                {userData[`${user}`].laps.map((lap, a) => (
+                  <Col md={12} key={a}>{lap.time}</Col>
+                ))}
               </Row>
             </Col>
           ))}
@@ -106,4 +119,3 @@ const Leaderboard = () => {
 };
 
 export default Leaderboard;
-
