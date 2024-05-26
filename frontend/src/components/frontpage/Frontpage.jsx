@@ -5,7 +5,7 @@ const Frontpage = (props) => {
   const [races, setRaces] = useState();
   const [isError, setIsError] = useState(false);
 
-  const authorToken = localStorage.getItem("accessToken");
+   const authorToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
     getRaces();
@@ -16,7 +16,7 @@ const Frontpage = (props) => {
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/race`, {
         headers: {
           Authorization: `Bearer ${authorToken}`,
-        },
+        }, 
       });
 
       if (res.status == 401) {
@@ -55,8 +55,8 @@ const Frontpage = (props) => {
             <ul>
               {race.users.map((user, a) => (
                 /* per accedere al nome : user[0].user.name */
-                <li key={`user-${a}`}>{user[0].user.name}</li>
-              ))}
+                <li key={`user-${a}`}>{user.user.name}</li>
+              ))} 
             </ul>
           </Col>
         ))}

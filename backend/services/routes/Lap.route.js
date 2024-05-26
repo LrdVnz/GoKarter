@@ -16,6 +16,8 @@ lapRoute.get("/:id", async (req, res) => {
   let result = await Lap.find({
     race: req.params.id,
   })
+    .populate("race")
+    .populate("user");
   res.send(result);
 });
 

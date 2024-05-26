@@ -1,6 +1,6 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import NavBar from "./components/navbar/NavBar";
-import Leadeboard from "./components/leaderboard/Leaderboard";
+import Leaderboard from "./components/leaderboard/Leaderboard";
 import Frontpage from "./components/frontpage/Frontpage";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <NavBar />
         <Routes>
          <Route path="/" element={<Frontpage />} />
-         <Route path="/race/:id" element={<Leadeboard />} />
+         <Route path="/race/:id" element={<Leaderboard />} />
         </Routes>
       </BrowserRouter>
     </>
