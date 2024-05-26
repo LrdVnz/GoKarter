@@ -14,6 +14,7 @@ raceRoute.get("/", async (req, res) => {
 
 raceRoute.get("/:id", async (req, res) => {
   let result = await Race.findById(req.params.id).populate("users.user");
+  console.log(result)
   res.send(result);
 });
 
@@ -26,5 +27,17 @@ raceRoute.post("/", async (req, res) => {
     console.log(err);
   }
 });
+
+raceRoute.put("/:id", async (req, res) => {
+  try {
+    const updatedBody = req.body;
+    const result = await Race.updateOne({ _id: req.params.id }, updatedBody);
+
+    res.send(result);
+  } catch (err) {
+    res.send(err);
+  }
+});
+
 
 module.exports = raceRoute;

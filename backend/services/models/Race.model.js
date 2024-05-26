@@ -1,5 +1,12 @@
 const { Schema, model } = require("mongoose");
 
+const usersSchema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+});
+
 const racesSchema = new Schema(
   {
     date: {
@@ -8,14 +15,7 @@ const racesSchema = new Schema(
     },
 
     users: [
-      [
-        {
-          user: {
-            type: Schema.Types.ObjectId,
-            ref: "User",
-          },
-        },
-      ],
+      usersSchema
     ],
     /* 
     Da calcolare in automatico! 
