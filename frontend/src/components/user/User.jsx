@@ -8,7 +8,7 @@ const User = ({ name, email, avatar }) => {
       <Card.Body>
         <Card.Text>{name}</Card.Text>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer >
         <Card.Text> {email} </Card.Text>
       </Card.Footer>
     </Card>

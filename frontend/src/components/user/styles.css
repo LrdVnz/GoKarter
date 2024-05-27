@@ -3,5 +3,14 @@
 }
 
 .card-text {
-    font-size: medium; 
+  font-size: medium;
+}
+
+.user {
+  align-items: center;
+}
+
+.card-footer {
+  width: 100%;
+  text-align: center;
 }

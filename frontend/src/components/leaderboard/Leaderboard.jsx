@@ -93,7 +93,7 @@ const Leaderboard = () => {
   }
 
   {
-   /*  userData &&
+    /*  userData &&
       Object.keys(userData).forEach((item) => {
         console.log(userData[item].user);
       }); */
@@ -103,11 +103,17 @@ const Leaderboard = () => {
       <Row>
         {userData &&
           Object.keys(userData).map((user, i) => (
-            <Col key={`user-${i}`} className="mt-1 g-0">
+            <Col key={`user-${i}`} className="mt-1 g-0 user-column">
               <User {...userData[`${user}`]["user"]} />
               <Row>
                 {userData[`${user}`].laps.map((lap, a) => (
-                  <Col md={12} key={a}>{lap.time}</Col>
+                  <Col
+                    md={12}
+                    key={a}
+                    className="d-flex justify-content-center"
+                  >
+                    {lap.time}
+                  </Col>
                 ))}
               </Row>
             </Col>
