@@ -5,9 +5,10 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
-  MDBBtn,
+  MDBListGroup,
+  MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import { MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
+import { Link } from "react-router-dom";
 
 const Frontpage = (props) => {
   const [races, setRaces] = useState();
@@ -49,28 +50,33 @@ const Frontpage = (props) => {
 
       {races &&
         races.map((race, i) => (
-          <MDBCard
+          <Link
+            to={`/race/${race._id}`}
             key={`item-${i}`}
-            md={4}
-            style={{
-              marginBottom: 50,
-            }}
+            className="race-link"
           >
-            <MDBCardBody>
-              {/* To do : put the race in a card */}
-              {/* Race item is clickable and bring you to the race. */}
-              <MDBCardTitle>{race.date}</MDBCardTitle>
-              <MDBCardText> partecipants :</MDBCardText>
-              <MDBListGroup>
-                {race.users.map((user, a) => (
-                  /* per accedere al nome : user[0].user.name */
-                  <MDBListGroupItem key={`user-${a}`}>
-                    <MDBCardText>{user.user.name}</MDBCardText>
-                  </MDBListGroupItem>
-                ))}
-              </MDBListGroup>
-            </MDBCardBody>
-          </MDBCard>
+            <MDBCard
+              md={4}
+              style={{
+                marginBottom: 50,
+              }}
+            >
+              <MDBCardBody>
+                {/* To do : put the race in a card */}
+                {/* Race item is clickable and bring you to the race. */}
+                <MDBCardTitle>{race.date}</MDBCardTitle>
+                <MDBCardText> partecipants :</MDBCardText>
+                <MDBListGroup>
+                  {race.users.map((user, a) => (
+                    /* per accedere al nome : user[0].user.name */
+                    <MDBListGroupItem key={`user-${a}`}>
+                      <MDBCardText>{user.user.name}</MDBCardText>
+                    </MDBListGroupItem>
+                  ))}
+                </MDBListGroup>
+              </MDBCardBody>
+            </MDBCard>
+          </Link>
         ))}
     </Row>
   );

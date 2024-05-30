@@ -106,12 +106,11 @@ const Leaderboard = () => {
           Object.keys(userData).map((user, i) => (
             <Col key={`user-${i}`} className="mt-1 g-0 user-column">
               <User {...userData[`${user}`]["user"]} />
-                <MDBListGroup className="laps-list">
+              <MDBListGroup className="laps-list">
                 {userData[`${user}`].laps.map((lap, a) => (
-                  
-                      <MDBListGroupItem>{lap.time}</MDBListGroupItem>
+                  <MDBListGroupItem>{lap.time}</MDBListGroupItem>
                 ))}
-                </MDBListGroup>
+              </MDBListGroup>
             </Col>
           ))}
       </Row>
