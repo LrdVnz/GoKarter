@@ -3,6 +3,7 @@ import { Container, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import User from "../user/User";
+import { MDBListGroup, MDBListGroupItem } from "mdb-react-ui-kit";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState();
@@ -100,26 +101,20 @@ const Leaderboard = () => {
   }
   return (
     <Container fluid="sm" className="p-2 main">
-      <Row>
+      <Row className="leaderboard-main">
         {userData &&
           Object.keys(userData).map((user, i) => (
             <Col key={`user-${i}`} className="mt-1 g-0 user-column">
               <User {...userData[`${user}`]["user"]} />
-              <Row>
+                <MDBListGroup className="laps-list">
                 {userData[`${user}`].laps.map((lap, a) => (
-                  <Col
-                    md={12}
-                    key={a}
-                    className="d-flex justify-content-center"
-                  >
-                    {lap.time}
-                  </Col>
+                  
+                      <MDBListGroupItem>{lap.time}</MDBListGroupItem>
                 ))}
-              </Row>
+                </MDBListGroup>
             </Col>
           ))}
       </Row>
-      <Row></Row>
     </Container>
   );
 };

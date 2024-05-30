@@ -5,3 +5,8 @@
 .user-column {
     max-width: 20rem;
 }
+
+.laps-list {
+    text-align: center;
+    padding-right: 0; 
+}
