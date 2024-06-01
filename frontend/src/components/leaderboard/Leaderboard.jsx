@@ -11,6 +11,7 @@ const Leaderboard = () => {
   const [race, setRace] = useState();
   const [laps, setLaps] = useState();
   const [userData, setUserData] = useState();
+  const [sortedData, setSortedData] = useState();
 
   const params = useParams();
   const { id } = params;
@@ -89,38 +90,33 @@ const Leaderboard = () => {
         userDataObj[`${currentId}`] = currentObject;
       });
       console.log(userDataObj);
-      sortUserData(userDataObj)
+      sortUserData(userDataObj);
       setUserData(userDataObj);
     }
   }
 
   function sortUserData(data) {
-    let usersKeys = Object.keys(data)
-    
-    let sortedData = []
+    let usersKeys = Object.keys(data);
+
+    let sortedData = [];
 
     usersKeys.forEach((userKey, i) => {
-         console.log("this is a lap of")
-         console.log(data[userKey].user.name)
-          data[userKey].laps.forEach((lap) => {
-            console.log(parseInt(lap.time))
-          })
-          
-        let sum = data[userKey].laps.reduce((acc, item) => {
-          return acc += parseInt(item.time)
-        }, 0)
-        let avg = sum / data[userKey].laps.length
-          
-        data[userKey]['avg'] = avg
-        sortedData.push(data[userKey])
-    })
+      let sum = data[userKey].laps.reduce((acc, item) => {
+        return (acc += parseInt(item.time));
+      }, 0);
+      let avg = sum / data[userKey].laps.length;
 
-    sortedData.sort(function(a, b) { return b.avg - a.avg})
+      data[userKey]["avg"] = avg;
+      sortedData.push(data[userKey]);
+    });
 
-    console.log(sortedData)
+    sortedData.sort(function (a, b) {
+      return b.avg - a.avg;
+    });
 
-   // accessing one lap : 
-   // data[usersKeys[0]].laps[0].time
+    setSortedData(sortedData);
+    // accessing one lap :
+    // data[usersKeys[0]].laps[0].time
   }
 
   {
@@ -132,12 +128,12 @@ const Leaderboard = () => {
   return (
     <Container fluid="sm" className="p-2 main">
       <Row className="leaderboard-main">
-        {userData &&
-          Object.keys(userData).map((user, i) => (
+        {sortedData &&
+          sortedData.map((userObj, i) => (
             <Col key={`user-${i}`} className="mt-1 g-0 user-column">
-              <User {...userData[`${user}`]["user"]} />
+              <User {...userObj.user} />
               <MDBListGroup className="laps-list">
-                {userData[`${user}`].laps.map((lap, a) => (
+                {userObj.laps.map((lap, a) => (
                   <MDBListGroupItem>{lap.time}</MDBListGroupItem>
                 ))}
               </MDBListGroup>
