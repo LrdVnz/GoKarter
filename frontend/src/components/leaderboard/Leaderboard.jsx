@@ -63,7 +63,7 @@ const Leaderboard = () => {
   }
 
   function createUserData() {
-    const userDataArr = {
+    const userDataObj = {
       /*  "user_id" : {
          avg: num,
          laps: []
@@ -86,11 +86,41 @@ const Leaderboard = () => {
 
         currentObject.laps = userLaps;
         currentObject.user = current_user["user"];
-        userDataArr[`${currentId}`] = currentObject;
+        userDataObj[`${currentId}`] = currentObject;
       });
-      console.log(userDataArr);
-      setUserData(userDataArr);
+      console.log(userDataObj);
+      sortUserData(userDataObj)
+      setUserData(userDataObj);
     }
+  }
+
+  function sortUserData(data) {
+    let usersKeys = Object.keys(data)
+    
+    let sortedData = []
+
+    usersKeys.forEach((userKey, i) => {
+         console.log("this is a lap of")
+         console.log(data[userKey].user.name)
+          data[userKey].laps.forEach((lap) => {
+            console.log(parseInt(lap.time))
+          })
+          
+        let sum = data[userKey].laps.reduce((acc, item) => {
+          return acc += parseInt(item.time)
+        }, 0)
+        let avg = sum / data[userKey].laps.length
+          
+        data[userKey]['avg'] = avg
+        sortedData.push(data[userKey])
+    })
+
+    sortedData.sort(function(a, b) { return b.avg - a.avg})
+
+    console.log(sortedData)
+
+   // accessing one lap : 
+   // data[usersKeys[0]].laps[0].time
   }
 
   {
