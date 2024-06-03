@@ -5,6 +5,7 @@ import Leaderboard from "./components/leaderboard/Leaderboard";
 import Frontpage from "./components/frontpage/Frontpage";
 import Register from "./components/register/register";
 import Login from "./components/login/login";
+import GoogleLogin from "./components/access/googleLogin";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Frontpage />} />
+          <Route path="/googleLogin" element={<GoogleLogin />} />
           <Route path="/race/:id" element={<Leaderboard />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

@@ -22,30 +22,28 @@ userRoute.get(
 
 userRoute.get(
   "/callback",
-  passport.authenticate("google", { session: false }),
-  (req, res, next) => {
+  passport.authenticate("google", { session: false }), async (req, res, next) => {
     try {
+    console.log("got to callback")
+    console.log(req.user)
       res.redirect(
-        `${process.env.BACKEND_URL}/user/profile?accessToken=${req.user.accToken}`
+        `${process.env.BACKEND_URL}/user/profile?accessToken=${req.user.accToken}&user=${req.user}`
       );
     } catch (error) {
-      next(error);
+      res.send(error);
     }
   }
 );
 
 userRoute.get("/profile", async (req, res) => {
   try {
-    let currentUser = await User.findById(req.user.user._id);
-
-    currentUser = JSON.stringify(currentUser);
-
+    let user = req.query.user
     let authToken = req.query.accessToken;
-    /* 
-da fare pagina frontend per prendere dati del login google
+  
+    console.log("ytoooooooo")
     res.redirect(
-      `${process.env.REACT_APP_FRONTEND_URL}/googleLogin?currentUser=${currentUser}&authToken=${authToken}`
-    ); */
+      `${process.env.FRONTEND_URL}/googleLogin?currentUser=${user}&authToken=${authToken}`
+    );
   } catch (err) {
     res.send(err);
   }

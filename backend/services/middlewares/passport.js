@@ -22,7 +22,7 @@ const googleStrategy = new GoogleStrategy(
           _id: user._id,
         });
         
-        passportNext(null, { accToken });
+        passportNext(null, { accToken, user });
       } else {
         const newUser = new User({
           name: given_name,
@@ -43,7 +43,7 @@ const googleStrategy = new GoogleStrategy(
           _id: newUser._id 
         });
         
-        passportNext(null, { accToken });
+        passportNext(null, { accToken, user });
       }
     } catch (error) {
       passportNext(error);
