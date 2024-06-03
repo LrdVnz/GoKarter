@@ -10,14 +10,16 @@ const GoogleLogin = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
-    const currentAuthor = searchParams.get("currentAuthor");
+    let currentUser = searchParams.get("currentUser");
     const authToken = searchParams.get("authToken");
 
-    console.log(currentAuthor);
+    currentUser = JSON.parse(currentUser)
+    
+    console.log(currentUser);
     console.log(authToken);
 
     localStorage.setItem("accessToken", authToken);
-    localStorage.setItem("currentAuthor", currentAuthor);
+    localStorage.setItem("currentUser", currentUser);
 
     navigate("/");
   });

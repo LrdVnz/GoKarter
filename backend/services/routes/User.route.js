@@ -24,10 +24,9 @@ userRoute.get(
   "/callback",
   passport.authenticate("google", { session: false }), async (req, res, next) => {
     try {
-    console.log("got to callback")
-    console.log(req.user)
+    let user = JSON.stringify(req.user.user)
       res.redirect(
-        `${process.env.BACKEND_URL}/user/profile?accessToken=${req.user.accToken}&user=${req.user}`
+        `${process.env.BACKEND_URL}/user/profile?accessToken=${req.user.accToken}&user=${user}`
       );
     } catch (error) {
       res.send(error);
@@ -37,7 +36,7 @@ userRoute.get(
 
 userRoute.get("/profile", async (req, res) => {
   try {
-    let user = req.query.user
+    let user = JSON.stringify(req.query.user)
     let authToken = req.query.accessToken;
   
     console.log("ytoooooooo")
