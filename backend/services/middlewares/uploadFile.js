@@ -29,31 +29,3 @@ module.exports = {
   uploadAvatar: uploadAvatar,
   uploadCover : uploadCover
 }; 
-
-/* const optionsCover = {
-  storage: new CloudinaryStorage({
-    cloudinary,
-    params: {
-      folder: "covers",
-    },
-  }),
-};
-
-const optionsAvatar = {
-  storage: new CloudinaryStorage({
-    cloudinary,
-    params: {
-      folder: "avatar",
-    },
-  }),
-};
-
-const uploadCover = multer(optionsCover).single("cover");
-
-const uploadAvatar = multer(optionsAvatar).single("avatar");
-
-module.exports = { 
-  uploadCover : uploadCover,
-  uploadAvatar: uploadAvatar
-};
- */

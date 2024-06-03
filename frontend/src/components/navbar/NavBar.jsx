@@ -2,38 +2,89 @@ import React from "react";
 import { Button, Container, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./styles.css";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const NavBar = (props) => {
-
-  /* Possible code for user login 
-  const [currentAuthor, setCurrentAuthor] = useState();
+  const [currentUser, setCurrentUser] = useState();
   //const [reloadingPage, setReloadingPage] = useContext()
 
   useEffect(() => {
-    setCurrentAuthor(JSON.parse(localStorage.getItem("currentAuthor")));
-    if(reloadingPage === false && currentAuthor !== null ){
+    setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+ /*    if(reloadingPage === false && currentUser !== null ){
       setReloadingPage(true);
       window.location.reload()
-    }  
+    }  */
   }, []);
+
+  
 
   function handleLogout() {
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("currentAuthor");
+    localStorage.removeItem("currentUser");
     //setReloadingPage(false)
     window.location.reload();
-  } */
+  }
 
   return (
-    <Navbar expand="lg" className="blog-navbar p-2" fixed="top">
-      <Container className="justify-content-between">
-          <Navbar.Brand>
-          <h2>GoKarter</h2>
-          </Navbar.Brand>
-        
-      </Container>
-    </Navbar>
+    <Navbar expand="lg" className="blog-navbar" fixed="top">
+    <Container className="justify-content-between">
+      <Navbar.Brand as={Link} to="/">
+        <h2>GoKarter</h2>
+      </Navbar.Brand>
+      <Button
+        as={Link}
+        to="/new"
+        className="blog-navbar-add-button bg-dark"
+        size="lg"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-plus-lg"
+          viewBox="0 0 16 16"
+        >
+          <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+        </svg>
+        New Race
+      </Button>
+    </Container>
+    <Container className="justify-content-end">
+      <Navbar.Brand className="d-flex align-items-center">
+        {currentUser && (
+          <>
+            {" "}
+            <p className="fs-5 ms-2 me-2 mb-0">{currentUser.name}</p>
+            <img
+              src={currentUser.avatar}
+              alt=""
+              width="50px"
+              style={{
+                border: "solid 1px",
+                borderRadius: "50%",
+              }}
+            />
+          </>
+        )}
+      </Navbar.Brand>
+      {currentUser == null && (
+        <>
+          <Button as={Link} to="/login" className="bg-dark" size="lg">
+            Login
+          </Button>
+          <Button as={Link} to="/register" className="bg-dark" size="lg">
+            Register
+          </Button>
+        </>
+      )}
+      {currentUser && (
+        <Button onClick={() => handleLogout()} className="bg-dark" size="lg">
+          Logout
+        </Button>
+      )}
+    </Container>
+  </Navbar>
   );
 };
 

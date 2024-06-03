@@ -33,7 +33,7 @@ export default function Login() {
       const json = await res.json();
       console.log(json);
       const authToken = json.accessToken;
-      const currentUser = JSON.stringify(json.user.name);
+      const currentUser = JSON.stringify(json.user);
       localStorage.setItem("accessToken", authToken);
       localStorage.setItem("currentUser", currentUser);
       navigate("/");
@@ -60,7 +60,7 @@ export default function Login() {
         </Form.Group>
         <Form.Group className="d-flex mt-3 justify-content-center">
           <Button type="submit" size="lg" variant="dark">
-            {" "}
+           
             Invia
           </Button>
         </Form.Group>

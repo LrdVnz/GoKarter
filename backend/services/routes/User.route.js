@@ -3,8 +3,8 @@ const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-const verifyToken = require("../middlewares/verifyToken")
-const { uploadAvatar } = require("../middlewares/uploadFile")
+const verifyToken = require("../middlewares/verifyToken");
+const { uploadAvatar } = require("../middlewares/uploadFile");
 
 require("dotenv").config();
 
@@ -41,7 +41,7 @@ userRoute.get("/profile", async (req, res) => {
     currentUser = JSON.stringify(currentUser);
 
     let authToken = req.query.accessToken;
-/* 
+    /* 
 da fare pagina frontend per prendere dati del login google
     res.redirect(
       `${process.env.REACT_APP_FRONTEND_URL}/googleLogin?currentUser=${currentUser}&authToken=${authToken}`
@@ -53,22 +53,23 @@ da fare pagina frontend per prendere dati del login google
 
 userRoute.post("/register", uploadAvatar, async (req, res) => {
   try {
-    
     let salt = await bcrypt.genSalt(10);
     let hashedPassword = await bcrypt.hash(req.body.password, salt);
-    
+
     /* 
     cambiamo la password passata dall'utente con quella generata da bcrypt
     in questo modo possiamo copiare direttamente il body per creare l'utente senza scrivere ogni parametro a mano!  
     */
-   req.body.password = hashedPassword;
-   
-   console.log(req.body);  
-   // per quando metto il form data tramite frontend
-   // req.body.avatar = req.file.path;
-   
-   let user = await User.create(req.body);
-   
+    req.body.password = hashedPassword;
+
+    console.log(req.body);
+
+    req.body.avatar = req.file.path;
+    // per quando metto il form data tramite frontend
+    // req.body.avatar = req.file.path;
+
+    let user = await User.create(req.body);
+
     res.send(user).status(201);
   } catch (err) {
     res.send(err);
@@ -80,6 +81,7 @@ userRoute.post("/login", async (req, res) => {
   if (user == null) {
     res.send("user not found");
   }
+  console.log(user);
   if (bcrypt.compare(req.body.password, user.password)) {
     const accessToken = createToken(user);
     res.json({ accessToken: accessToken, user: user });
@@ -94,9 +96,8 @@ function createToken(user) {
   };
 
   const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET);
-  
+
   return accessToken;
 }
 
 module.exports = userRoute;
-
