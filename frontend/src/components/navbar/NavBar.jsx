@@ -60,9 +60,11 @@ const NavBar = (props) => {
               src={currentUser.avatar}
               alt=""
               width="50px"
+              height="50px"
               style={{
                 border: "solid 1px",
                 borderRadius: "50%",
+                objectFit: "cover"
               }}
             />
           </>
