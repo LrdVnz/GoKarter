@@ -1,9 +1,9 @@
 import "./styles.css";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import User from "../user/User";
-import { MDBListGroup, MDBListGroupItem } from "mdb-react-ui-kit";
+import { MDBListGroup, MDBListGroupItem, MDBBtn } from "mdb-react-ui-kit";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState();
@@ -30,6 +30,29 @@ const Leaderboard = () => {
   useEffect(() => {
     createUserData();
   }, [users]);
+
+  async function handleAddLap(event) {
+    /// servono race, user e time
+    event.preventDefault();
+    console.log("submittin'");
+    //per accedere a user id  console.log(event.target.elements[2].value)
+    let formBody = {
+      race: id,
+      user: event.target.elements[2].value,
+      time: event.target.elements[1].value,
+    };
+    console.log(JSON.stringify(formBody))
+
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/lap/`, {
+      method: "POST",
+       headers: {
+          "Content-Type": "application/json"
+        },
+      body: JSON.stringify(formBody),
+    }); 
+
+    window.location.reload()
+  }
 
   async function getRace() {
     try {
@@ -111,7 +134,7 @@ const Leaderboard = () => {
     });
 
     sortedData.sort(function (a, b) {
-      return b.avg - a.avg;
+      return a.avg - b.avg;
     });
 
     setSortedData(sortedData);
@@ -136,6 +159,21 @@ const Leaderboard = () => {
                 {userObj.laps.map((lap, a) => (
                   <MDBListGroupItem>{lap.time}</MDBListGroupItem>
                 ))}
+                {/* da mettere bottone per aggiunta tasti */}
+                <Form onSubmit={handleAddLap}>
+                  <Form.Group>
+                    <MDBBtn type="submit">AddLap</MDBBtn>
+                    <Form.Label> add the next lap: </Form.Label>
+                    <Form.Control controlId="lap-time" type="input" />
+                    <Form.Control
+                      controlId="lap-user"
+                      type=""
+                      value={userObj.user._id}
+                      disabled
+                      style={{ display: "none" }}
+                    ></Form.Control>
+                  </Form.Group>
+                </Form>
               </MDBListGroup>
             </Col>
           ))}
