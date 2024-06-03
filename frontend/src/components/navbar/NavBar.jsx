@@ -21,6 +21,11 @@ const NavBar = (props) => {
     window.location.reload();
   }
 
+  function handleImgError(event) {
+    event.target.src =
+      "https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg";
+  }
+
   async function newRace() {
     const date = new Date();
 
@@ -82,6 +87,7 @@ const NavBar = (props) => {
               {" "}
               <p className="fs-5 ms-2 me-2 mb-0">{currentUser.name}</p>
               <img
+                onError={handleImgError}
                 src={currentUser.avatar}
                 alt=""
                 width="50px"
