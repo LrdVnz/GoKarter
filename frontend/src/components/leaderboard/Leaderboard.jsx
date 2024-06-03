@@ -218,8 +218,12 @@ const Leaderboard = () => {
                   {/* da mettere bottone per aggiunta tasti */}
                   <Form onSubmit={handleAddLap}>
                     <Form.Group>
-                      <MDBBtn type="submit">Add Lap Time</MDBBtn>
-                      <Form.Control controlId="lap-time" type="input" />
+                      {userObj.user._id == currentUser._id && (
+                        <Form.Group>
+                          <MDBBtn type="submit">Add Lap Time</MDBBtn>
+                          <Form.Control controlId="lap-time" type="input" />
+                        </Form.Group>
+                      )}
                       <Form.Control
                         controlId="lap-user"
                         type=""
