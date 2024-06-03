@@ -14,7 +14,7 @@ const Frontpage = (props) => {
   const [races, setRaces] = useState();
   const [isError, setIsError] = useState(false);
 
-  const authorToken = localStorage.getItem("accessToken");
+  const userToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
     getRaces();
@@ -24,7 +24,7 @@ const Frontpage = (props) => {
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/race`, {
         headers: {
-          Authorization: `Bearer ${authorToken}`,
+          Authorization: `Bearer ${userToken}`,
         },
       });
 

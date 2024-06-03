@@ -88,12 +88,12 @@ userRoute.post("/login", async (req, res) => {
   }
 });
 
-function createToken(author) {
-  const authorPayload = {
-    author: author,
+function createToken(user) {
+  const userPayload = {
+    user: user,
   };
 
-  const accessToken = jwt.sign(authorPayload, process.env.ACCESS_TOKEN_SECRET);
+  const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET);
   
   return accessToken;
 }

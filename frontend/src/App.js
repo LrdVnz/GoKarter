@@ -4,6 +4,7 @@ import Footer from "./components/footer/Footer";
 import Leaderboard from "./components/leaderboard/Leaderboard";
 import Frontpage from "./components/frontpage/Frontpage";
 import Register from "./components/register/register";
+import Login from "./components/login/login";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Frontpage />} />
           <Route path="/race/:id" element={<Leaderboard />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>
