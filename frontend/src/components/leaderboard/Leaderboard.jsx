@@ -166,6 +166,7 @@ const Leaderboard = () => {
         currentObject.user = current_user["user"];
         userDataObj[`${currentId}`] = currentObject;
       });
+      console.log(userDataObj)
       sortUserData(userDataObj);
       setUserData(userDataObj);
     }
@@ -237,12 +238,15 @@ const Leaderboard = () => {
               </Col>
             ))}
           {/* User adding space, to check if user is already present*/}
-
+         {
+       
+          (race && race["users"].includes(currentUser)) &&
           <Col className="mt-1 g-0 user-column">
             <Form onSubmit={handleAddUser}>
               <MDBBtn type="submit">Add Yourself in the race</MDBBtn>
             </Form>
           </Col>
+        }
         </Row>
       )}
     </Container>
