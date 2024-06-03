@@ -63,10 +63,16 @@ const Leaderboard = () => {
   async function handleAddUser(event) {
     event.preventDefault();
 
+    let newUser = { user: currentUser._id };
     let updatedUsers = [];
     updatedUsers.push(...race["users"]);
-    updatedUsers.push({ user: currentUser._id });
-    console.log(updatedUsers);
+    let alreadyPresent = updatedUsers.includes(newUser);
+    if (alreadyPresent != false){
+      updatedUsers.push(newUser);
+    } else {
+      alert("user already present in the race")
+    }
+
     let formBody = {
       users: updatedUsers,
     };
