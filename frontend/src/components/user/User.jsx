@@ -11,7 +11,9 @@ import {
 const User = ({ name, email, avatar }) => {
   return (
     <MDBCard className="user">
+      <div class="img-container">
       <MDBCardImage variant="top" src={avatar} className="user-img" />
+      </div>
       <MDBCardBody>
         <MDBCardText>{name}</MDBCardText>
       </MDBCardBody>
