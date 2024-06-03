@@ -39,5 +39,17 @@ raceRoute.put("/:id", async (req, res) => {
   }
 });
 
+raceRoute.put("/:id/users", async (req, res) => {
+  try {
+    const race = await Race.findById({ _id: req.params.id})
+
+    const updatedBody = req.body;
+    const result = await Race.updateOne({ _id: req.params.id }, updatedBody);
+
+    res.send(result);
+  } catch (err) {
+    res.send(err);
+  }
+});
 
 module.exports = raceRoute;

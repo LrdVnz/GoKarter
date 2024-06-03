@@ -12,9 +12,15 @@ const Leaderboard = () => {
   const [laps, setLaps] = useState();
   const [userData, setUserData] = useState();
   const [sortedData, setSortedData] = useState();
+  const [currentUser, setCurrentUser] = useState();
 
   const params = useParams();
   const { id } = params;
+  //const [reloadingPage, setReloadingPage] = useContext()
+
+  useEffect(() => {
+    setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+  }, []);
 
   useEffect(() => {
     getRace();
@@ -41,17 +47,40 @@ const Leaderboard = () => {
       user: event.target.elements[2].value,
       time: event.target.elements[1].value,
     };
-    console.log(JSON.stringify(formBody))
+    console.log(JSON.stringify(formBody));
 
     const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/lap/`, {
       method: "POST",
-       headers: {
-          "Content-Type": "application/json"
-        },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(formBody),
-    }); 
+    });
 
-    window.location.reload()
+    window.location.reload();
+  }
+
+  async function handleAddUser(event) {
+    event.preventDefault();
+
+    let updatedUsers = [];
+    updatedUsers.push(...race["users"]);
+    updatedUsers.push({ user: currentUser._id });
+    console.log(updatedUsers);
+    let formBody = {
+      users: updatedUsers,
+    };
+
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/race/${id}/users`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formBody),
+      }
+    );
   }
 
   async function getRace() {
@@ -112,7 +141,6 @@ const Leaderboard = () => {
         currentObject.user = current_user["user"];
         userDataObj[`${currentId}`] = currentObject;
       });
-      console.log(userDataObj);
       sortUserData(userDataObj);
       setUserData(userDataObj);
     }
@@ -162,8 +190,7 @@ const Leaderboard = () => {
                 {/* da mettere bottone per aggiunta tasti */}
                 <Form onSubmit={handleAddLap}>
                   <Form.Group>
-                    <MDBBtn type="submit">AddLap</MDBBtn>
-                    <Form.Label> add the next lap: </Form.Label>
+                    <MDBBtn type="submit">Add Lap Time</MDBBtn>
                     <Form.Control controlId="lap-time" type="input" />
                     <Form.Control
                       controlId="lap-user"
@@ -177,6 +204,13 @@ const Leaderboard = () => {
               </MDBListGroup>
             </Col>
           ))}
+        {/* User adding space, to check if user is already present*/}
+
+        <Col className="mt-1 g-0 user-column">
+          <Form onSubmit={handleAddUser}>
+            <MDBBtn type="submit">Add Yourself in the race</MDBBtn>
+          </Form>
+        </Col>
       </Row>
     </Container>
   );
