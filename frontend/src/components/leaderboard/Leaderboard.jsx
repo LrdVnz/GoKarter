@@ -7,16 +7,17 @@ import { MDBListGroup, MDBListGroupItem, MDBBtn } from "mdb-react-ui-kit";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState();
-  const [isError, setIsError] = useState();
+  const [isError, setIsError] = useState(false);
   const [race, setRace] = useState();
   const [laps, setLaps] = useState();
   const [userData, setUserData] = useState();
   const [sortedData, setSortedData] = useState();
   const [currentUser, setCurrentUser] = useState();
 
+  const [userToken] = useState(localStorage.getItem("accessToken"));
+
   const params = useParams();
   const { id } = params;
-  //const [reloadingPage, setReloadingPage] = useContext()
 
   useEffect(() => {
     setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
@@ -53,6 +54,7 @@ const Leaderboard = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
       },
       body: JSON.stringify(formBody),
     });
@@ -67,10 +69,10 @@ const Leaderboard = () => {
     let updatedUsers = [];
     updatedUsers.push(...race["users"]);
     let alreadyPresent = updatedUsers.includes(newUser);
-    if (alreadyPresent != false){
+    if (alreadyPresent != false) {
       updatedUsers.push(newUser);
     } else {
-      alert("user already present in the race")
+      alert("user already present in the race");
     }
 
     let formBody = {
@@ -83,6 +85,7 @@ const Leaderboard = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
         },
         body: JSON.stringify(formBody),
       }
@@ -92,12 +95,20 @@ const Leaderboard = () => {
   async function getRace() {
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/race/${id}`
+        `${process.env.REACT_APP_BACKEND_URL}/race/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
       );
       // Per ora senza autorizzazione
 
-      const json = await res.json();
+      if (res.status == 401) {
+        setIsError(true);
+      }
 
+      const json = await res.json();
       if (json) {
         setRace(json);
       }
@@ -108,7 +119,15 @@ const Leaderboard = () => {
 
   async function getLaps() {
     try {
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/lap/${id}`);
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/lap/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
       // Per ora senza autorizzazione
 
       const json = await res.json();
@@ -184,40 +203,44 @@ const Leaderboard = () => {
   }
   return (
     <Container fluid="sm" className="p-2 main">
-      <Row className="leaderboard-main">
-        {sortedData &&
-          sortedData.map((userObj, i) => (
-            <Col key={`user-${i}`} className="mt-1 g-0 user-column">
-              <User {...userObj.user} />
-              <MDBListGroup className="laps-list">
-                {userObj.laps.map((lap, a) => (
-                  <MDBListGroupItem>{lap.time}</MDBListGroupItem>
-                ))}
-                {/* da mettere bottone per aggiunta tasti */}
-                <Form onSubmit={handleAddLap}>
-                  <Form.Group>
-                    <MDBBtn type="submit">Add Lap Time</MDBBtn>
-                    <Form.Control controlId="lap-time" type="input" />
-                    <Form.Control
-                      controlId="lap-user"
-                      type=""
-                      value={userObj.user._id}
-                      disabled
-                      style={{ display: "none" }}
-                    ></Form.Control>
-                  </Form.Group>
-                </Form>
-              </MDBListGroup>
-            </Col>
-          ))}
-        {/* User adding space, to check if user is already present*/}
+      {isError && <h2>401 unauthorized. Please log in</h2>}
 
-        <Col className="mt-1 g-0 user-column">
-          <Form onSubmit={handleAddUser}>
-            <MDBBtn type="submit">Add Yourself in the race</MDBBtn>
-          </Form>
-        </Col>
-      </Row>
+      {!isError && (
+        <Row className="leaderboard-main">
+          {sortedData &&
+            sortedData.map((userObj, i) => (
+              <Col key={`user-${i}`} className="mt-1 g-0 user-column">
+                <User {...userObj.user} />
+                <MDBListGroup className="laps-list">
+                  {userObj.laps.map((lap, a) => (
+                    <MDBListGroupItem>{lap.time}</MDBListGroupItem>
+                  ))}
+                  {/* da mettere bottone per aggiunta tasti */}
+                  <Form onSubmit={handleAddLap}>
+                    <Form.Group>
+                      <MDBBtn type="submit">Add Lap Time</MDBBtn>
+                      <Form.Control controlId="lap-time" type="input" />
+                      <Form.Control
+                        controlId="lap-user"
+                        type=""
+                        value={userObj.user._id}
+                        disabled
+                        style={{ display: "none" }}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Form>
+                </MDBListGroup>
+              </Col>
+            ))}
+          {/* User adding space, to check if user is already present*/}
+
+          <Col className="mt-1 g-0 user-column">
+            <Form onSubmit={handleAddUser}>
+              <MDBBtn type="submit">Add Yourself in the race</MDBBtn>
+            </Form>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };

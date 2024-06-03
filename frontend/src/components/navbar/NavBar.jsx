@@ -10,10 +10,6 @@ const NavBar = (props) => {
 
   useEffect(() => {
     setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
- /*    if(reloadingPage === false && currentUser !== null ){
-      setReloadingPage(true);
-      window.location.reload()
-    }  */
   }, []);
 
   

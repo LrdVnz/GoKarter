@@ -13,8 +13,9 @@ import { Link } from "react-router-dom";
 const Frontpage = (props) => {
   const [races, setRaces] = useState();
   const [isError, setIsError] = useState(false);
-
-  const userToken = localStorage.getItem("accessToken");
+  const [userToken] = useState(
+    localStorage.getItem("accessToken")
+  );
 
   useEffect(() => {
     getRaces();
