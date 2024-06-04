@@ -2,22 +2,16 @@ import React from "react";
 import { Button, Container, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./styles.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { CurrentUserContext } from "../../contexts/currentUserContext";
 
 const NavBar = (props) => {
-  const [currentUser, setCurrentUser] = useState();
   const [userToken] = useState(localStorage.getItem("accessToken"));
-
-  //const [reloadingPage, setReloadingPage] = useContext()
-
-  useEffect(() => {
-    setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
-  }, []);
+  const { currentUser } = useContext(CurrentUserContext)
 
   function handleLogout() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("currentUser");
-    //setReloadingPage(false)
     window.location.reload();
   }
 
@@ -84,7 +78,6 @@ const NavBar = (props) => {
         <Navbar.Brand className="d-flex align-items-center">
           {currentUser && (
             <>
-              {" "}
               <p className="fs-5 ms-2 me-2 mb-0">{currentUser.name}</p>
               <img
                 onError={handleImgError}

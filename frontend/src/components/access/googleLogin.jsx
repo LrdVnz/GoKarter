@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/currentUserContext";
 
 const GoogleLogin = () => {
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext)
   // const { currentAuthor, authToken } = useParams();
   const location = useLocation();
 
@@ -20,6 +22,7 @@ const GoogleLogin = () => {
 
     localStorage.setItem("accessToken", authToken);
     localStorage.setItem("currentUser", currentUser);
+    setCurrentUser(JSON.parse(currentUser))
 
     navigate("/");
   });

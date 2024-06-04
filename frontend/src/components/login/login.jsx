@@ -1,9 +1,12 @@
 import { Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/currentUserContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext)
 
   const handleGoogleAuth = (event) => {
   
@@ -36,9 +39,8 @@ export default function Login() {
       const currentUser = JSON.stringify(json.user);
       localStorage.setItem("accessToken", authToken);
       localStorage.setItem("currentUser", currentUser);
+      setCurrentUser(JSON.parse(currentUser))
       navigate("/");
-      console.log(res);
-      console.log("logged in...");
     } catch (err) {
       console.log(err);
     }
