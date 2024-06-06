@@ -22,8 +22,8 @@ raceRoute.get("/:id", verifyToken , async (req, res) => {
 raceRoute.post("/", verifyToken ,async (req, res) => {
   try {
     let race = await Race.create(req.body);
-    console.log(race);
-    res.send(race).status(201);
+   
+    res.sendStatus(201);
   } catch (err) {
     console.log(err);
   }

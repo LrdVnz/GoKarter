@@ -71,7 +71,7 @@ const Leaderboard = () => {
     let alreadyPresent = updatedUsers.includes(newUser);
     if (!alreadyPresent) {
       updatedUsers.push(newUser);
-      window.location.reload()
+      window.location.reload();
     } else {
       alert("user already present in the race");
     }
@@ -167,7 +167,7 @@ const Leaderboard = () => {
         currentObject.user = current_user["user"];
         userDataObj[`${currentId}`] = currentObject;
       });
-      console.log(userDataObj)
+      console.log(userDataObj);
       sortUserData(userDataObj);
       setUserData(userDataObj);
     }
@@ -203,6 +203,22 @@ const Leaderboard = () => {
         console.log(userData[item].user);
       }); */
   }
+
+  function controlUser() {
+    let result = false;
+
+    Object.keys(race["users"]).forEach((key, i) => {
+      console.log("currently checking race user : ");
+      console.log(race["users"][key]["user"]);
+      console.log("current user is :");
+      console.log(currentUser);
+      if (currentUser._id === race["users"][key]["user"]._id) {
+        result = true;
+      }
+    });
+    return result;
+  }
+
   return (
     <Container fluid="sm" className="p-2 main">
       {isError && <h2>401 unauthorized. Please log in</h2>}
@@ -239,15 +255,13 @@ const Leaderboard = () => {
               </Col>
             ))}
           {/* User adding space, to check if user is already present*/}
-         {
-       
-          (race && !race["users"].includes(currentUser)) &&
-          <Col className="mt-1 g-0 user-column">
-            <Form onSubmit={handleAddUser}>
-              <MDBBtn type="submit">Add Yourself in the race</MDBBtn>
-            </Form>
-          </Col>
-        }
+          {race && !controlUser() && (
+            <Col className="mt-1 g-0 user-column">
+              <Form onSubmit={handleAddUser}>
+                <MDBBtn type="submit">Add Yourself in the race</MDBBtn>
+              </Form>
+            </Col>
+          )}
         </Row>
       )}
     </Container>
