@@ -69,8 +69,9 @@ const Leaderboard = () => {
     let updatedUsers = [];
     updatedUsers.push(...race["users"]);
     let alreadyPresent = updatedUsers.includes(newUser);
-    if (alreadyPresent == false) {
+    if (!alreadyPresent) {
       updatedUsers.push(newUser);
+      window.location.reload()
     } else {
       alert("user already present in the race");
     }
