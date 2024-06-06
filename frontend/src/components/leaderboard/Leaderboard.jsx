@@ -69,7 +69,7 @@ const Leaderboard = () => {
     let updatedUsers = [];
     updatedUsers.push(...race["users"]);
     let alreadyPresent = updatedUsers.includes(newUser);
-    if (alreadyPresent != false) {
+    if (alreadyPresent == false) {
       updatedUsers.push(newUser);
     } else {
       alert("user already present in the race");
@@ -240,7 +240,7 @@ const Leaderboard = () => {
           {/* User adding space, to check if user is already present*/}
          {
        
-          (race && race["users"].includes(currentUser)) &&
+          (race && !race["users"].includes(currentUser)) &&
           <Col className="mt-1 g-0 user-column">
             <Form onSubmit={handleAddUser}>
               <MDBBtn type="submit">Add Yourself in the race</MDBBtn>
