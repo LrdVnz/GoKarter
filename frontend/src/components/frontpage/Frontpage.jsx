@@ -44,7 +44,8 @@ const Frontpage = (props) => {
   }
 
   return (
-    <Row className="main">
+    <Row className="main p-3">
+      <h2>Races:</h2>
       {!races && !isError && <p> loading </p>}
 
       {isError && <h2>401 unauthorized. Please log in</h2>}
