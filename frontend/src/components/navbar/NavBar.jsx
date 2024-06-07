@@ -7,7 +7,7 @@ import { CurrentUserContext } from "../../contexts/currentUserContext";
 
 const NavBar = (props) => {
   const [userToken] = useState(localStorage.getItem("accessToken"));
-  const { currentUser } = useContext(CurrentUserContext)
+  const { currentUser } = useContext(CurrentUserContext);
 
   function handleLogout() {
     localStorage.removeItem("accessToken");
@@ -56,23 +56,25 @@ const NavBar = (props) => {
         <Navbar.Brand as={Link} to="/">
           <h2>GoKarter</h2>
         </Navbar.Brand>
-        <Button
-          className="blog-navbar-add-button bg-dark"
-          size="lg"
-          onClick={() => newRace()}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-plus-lg"
-            viewBox="0 0 16 16"
+        {currentUser && (
+          <Button
+            className="blog-navbar-add-button bg-dark"
+            size="lg"
+            onClick={() => newRace()}
           >
-            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
-          </svg>
-          New Race
-        </Button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-plus-lg"
+              viewBox="0 0 16 16"
+            >
+              <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+            </svg>
+            New Race
+          </Button>
+        )}
       </Container>
       <Container className="justify-content-end">
         <Navbar.Brand className="d-flex align-items-center">

@@ -39,7 +39,6 @@ userRoute.get("/profile", async (req, res) => {
     let user = JSON.stringify(req.query.user)
     let authToken = req.query.accessToken;
   
-    console.log("ytoooooooo")
     res.redirect(
       `${process.env.FRONTEND_URL}/googleLogin?currentUser=${user}&authToken=${authToken}`
     );
