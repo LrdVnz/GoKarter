@@ -42,7 +42,7 @@ export default function Login() {
       setCurrentUser(JSON.parse(currentUser))
       navigate("/");
     } catch (err) {
-      console.log(err);
+      alert("error. Check if username and password are correct");
     }
   }
 

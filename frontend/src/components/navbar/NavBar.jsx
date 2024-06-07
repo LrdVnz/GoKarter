@@ -98,10 +98,10 @@ const NavBar = (props) => {
         </Navbar.Brand>
         {currentUser == null && (
           <>
-            <Button as={Link} to="/login" className="bg-dark" size="lg">
+            <Button as={Link} to="/login" className="bg-dark m-1" size="lg">
               Login
             </Button>
-            <Button as={Link} to="/register" className="bg-dark" size="lg">
+            <Button as={Link} to="/register" className="bg-dark m-1" size="lg">
               Register
             </Button>
           </>
