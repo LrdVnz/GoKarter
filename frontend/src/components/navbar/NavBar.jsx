@@ -54,11 +54,11 @@ const NavBar = (props) => {
     <Navbar expand="lg" className="blog-navbar" fixed="top">
       <Container className="justify-content-between">
         <Navbar.Brand as={Link} to="/">
-          <h2>GoKarter</h2>
+          <h2 style={{color:"#bd3030"}}>GoKarter</h2>
         </Navbar.Brand>
         {currentUser && (
           <Button
-            className="blog-navbar-add-button bg-dark"
+            className="blog-navbar-add-button bg-custom"
             size="lg"
             onClick={() => newRace()}
           >
@@ -107,7 +107,7 @@ const NavBar = (props) => {
           </>
         )}
         {currentUser && (
-          <Button onClick={() => handleLogout()} className="bg-dark" size="lg">
+          <Button onClick={() => handleLogout()} className="bg-custom" size="lg">
             Logout
           </Button>
         )}

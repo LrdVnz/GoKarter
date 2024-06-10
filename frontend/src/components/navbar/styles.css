@@ -20,3 +20,7 @@
   width: 200px;
   text-decoration: none;
 }
+
+.bg-custom {
+  background-color: #bd3030;
+}

@@ -238,7 +238,7 @@ const Leaderboard = () => {
                     <Form.Group>
                       {userObj.user._id == currentUser._id && (
                         <Form.Group>
-                          <MDBBtn type="submit">Add Lap Time</MDBBtn>
+                          <MDBBtn type="submit" className="btn-custom">Add Lap Time</MDBBtn>
                           <Form.Control controlId="lap-time" type="input" />
                         </Form.Group>
                       )}
