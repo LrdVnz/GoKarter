@@ -41,12 +41,12 @@ const Leaderboard = () => {
   async function handleAddLap(event) {
     /// servono race, user e time
     event.preventDefault();
-    console.log("submittin'");
+    console.log(event);
     //per accedere a user id  console.log(event.target.elements[2].value)
-    let formBody = {
+     let formBody = {
       race: id,
       user: event.target.elements[2].value,
-      time: event.target.elements[1].value,
+      time: event.target.elements[0].value,
     };
     console.log(JSON.stringify(formBody));
 
@@ -152,7 +152,7 @@ const Leaderboard = () => {
         Authorization: `Bearer ${userToken}`,
       }
     });
-    
+
     window.location.reload(); 
   }
 
