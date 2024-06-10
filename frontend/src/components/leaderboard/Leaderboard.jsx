@@ -258,7 +258,7 @@ const Leaderboard = () => {
           {race && !controlUser() && (
             <Col className="mt-1 g-0 user-column">
               <Form onSubmit={handleAddUser}>
-                <MDBBtn type="submit">Add Yourself in the race</MDBBtn>
+                <MDBBtn type="submit" className="btn-custom">Add Yourself in the race</MDBBtn>
               </Form>
             </Col>
           )}

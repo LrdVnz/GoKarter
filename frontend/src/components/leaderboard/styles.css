@@ -1,16 +1,20 @@
 .main {
-    margin-top: 100px; 
+  margin-top: 100px;
 }
 
 .user-column {
-    max-width: 20rem;
+  max-width: 20rem;
 }
 
 .laps-list {
-    text-align: center;
-    padding-right: 0; 
+  text-align: center;
+  padding-right: 0;
 }
 
 .btn-custom {
-   background-color:  #bd3030;
+  background-color: #bd3030;
+}
+
+.btn-custom:hover {
+  background-color: #bd3030;
 }
