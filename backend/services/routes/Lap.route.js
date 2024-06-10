@@ -32,4 +32,15 @@ lapRoute.post("/", verifyToken, async (req, res) => {
   }
 });
 
+lapRoute.delete("/:id", verifyToken, async (req, res) => {
+  try {
+    let result = await Lap.deleteOne({ _id: req.params.id });
+    
+    res.send(result).status(201);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
 module.exports = lapRoute;

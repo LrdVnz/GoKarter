@@ -13,6 +13,7 @@
 
 .btn-custom {
   background-color: #bd3030;
+  margin: 5px; 
 }
 
 .btn-custom:hover {

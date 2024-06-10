@@ -141,6 +141,21 @@ const Leaderboard = () => {
     }
   }
 
+  async function handleDeleteLap(event) {
+    event.preventDefault();
+    console.log(event)
+    console.log(event.target[1].value)
+
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/lap/${event.target[1].value}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      }
+    });
+    
+    window.location.reload(); 
+  }
+
   function createUserData() {
     const userDataObj = {
       /*  "user_id" : {
@@ -208,10 +223,10 @@ const Leaderboard = () => {
     let result = false;
 
     Object.keys(race["users"]).forEach((key, i) => {
-      console.log("currently checking race user : ");
+      /* console.log("currently checking race user : ");
       console.log(race["users"][key]["user"]);
       console.log("current user is :");
-      console.log(currentUser);
+      console.log(currentUser); */
       if (currentUser._id === race["users"][key]["user"]._id) {
         result = true;
       }
@@ -231,15 +246,28 @@ const Leaderboard = () => {
                 <User {...userObj.user} />
                 <MDBListGroup className="laps-list">
                   {userObj.laps.map((lap, a) => (
-                    <MDBListGroupItem>{lap.time}</MDBListGroupItem>
+                    <Form onSubmit={handleDeleteLap}>
+                      <Form.Group>
+                        <MDBListGroupItem>{lap.time}</MDBListGroupItem>
+                        {userObj.user._id == currentUser._id && (
+                          <Form.Group>
+                            <MDBBtn type="submit" className="btn-custom">
+                              delete lap
+                            </MDBBtn>
+                            <Form.Control controlId="lap-delete-id" type="input" disabled style={{display:"none"}} value={lap._id}/>
+                          </Form.Group>
+                        )}
+                      </Form.Group>
+                    </Form>
                   ))}
-                  {/* da mettere bottone per aggiunta tasti */}
                   <Form onSubmit={handleAddLap}>
                     <Form.Group>
                       {userObj.user._id == currentUser._id && (
                         <Form.Group>
-                          <MDBBtn type="submit" className="btn-custom">Add Lap Time</MDBBtn>
-                          <Form.Control controlId="lap-time" type="input" />
+                          <Form.Control controlId="lap-time" type="input"  />
+                          <MDBBtn type="submit" className="btn-custom">
+                            Add Lap Time
+                          </MDBBtn>
                         </Form.Group>
                       )}
                       <Form.Control
@@ -258,7 +286,9 @@ const Leaderboard = () => {
           {race && !controlUser() && (
             <Col className="mt-1 g-0 user-column">
               <Form onSubmit={handleAddUser}>
-                <MDBBtn type="submit" className="btn-custom">Add Yourself in the race</MDBBtn>
+                <MDBBtn type="submit" className="btn-custom">
+                  Add Yourself in the race
+                </MDBBtn>
               </Form>
             </Col>
           )}
