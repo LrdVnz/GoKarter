@@ -266,7 +266,7 @@ const Leaderboard = () => {
                       {userObj.user._id == currentUser._id && (
                         <Form.Group>
                           <Form.Control controlId="lap-time" type="input"  />
-                          <MDBBtn type="submit" className="btn-custom laps">
+                          <MDBBtn type="submit" className="btn-custom button-text laps">
                             Add Lap Time
                           </MDBBtn>
                         </Form.Group>
@@ -287,7 +287,7 @@ const Leaderboard = () => {
           {race && !controlUser() && (
             <Col className="mt-1 g-0 user-column">
               <Form onSubmit={handleAddUser}>
-                <MDBBtn type="submit" className="btn-custom">
+                <MDBBtn type="submit" className="btn-custom button-text">
                   Add Yourself in the race
                 </MDBBtn>
               </Form>

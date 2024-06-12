@@ -34,3 +34,7 @@ button:hover {
 .custom-text.inner {
   font-size:20px
 }
+
+.main {
+  margin-bottom: 200px !important; 
+}
