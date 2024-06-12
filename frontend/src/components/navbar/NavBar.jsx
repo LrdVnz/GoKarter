@@ -100,10 +100,10 @@ const NavBar = (props) => {
         </Navbar.Brand>
         {currentUser == null && (
           <>
-            <Button as={Link} to="/login" className="bg-dark m-1 button-text" size="lg">
+            <Button as={Link} to="/login" className="bg-dark m-1 bg-custom button-text" size="lg">
               Login
             </Button>
-            <Button as={Link} to="/register" className="bg-dark m-1 button-text" size="lg">
+            <Button as={Link} to="/register" className="bg-dark m-1 bg-custom button-text" size="lg">
               Register
             </Button>
           </>

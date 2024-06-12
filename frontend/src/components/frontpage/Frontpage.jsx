@@ -68,13 +68,13 @@ const Frontpage = (props) => {
               >
                 {/* To do : put the race in a card */}
                 {/* Race item is clickable and bring you to the race. */}
-                <MDBCardTitle className="custom-text">{race.date}</MDBCardTitle>
-                <MDBCardText className="custom-text"> partecipants :</MDBCardText>
+                <MDBCardTitle className="custom-text inner">{race.date}</MDBCardTitle>
+                <MDBCardText className="custom-text inner"> partecipants :</MDBCardText>
                 <MDBListGroup>
                   {race.users.map((user, a) => (
                     /* per accedere al nome : user[0].user.name */
                     <MDBListGroupItem key={`user-${a}`}>
-                      <MDBCardText>{user.user.name}</MDBCardText>
+                      <MDBCardText className="custom-text inner">{user.user.name}</MDBCardText>
                     </MDBListGroupItem>
                   ))}
                 </MDBListGroup>

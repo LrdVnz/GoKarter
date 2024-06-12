@@ -31,11 +31,6 @@ button:hover {
   color:#313131!important;
 } 
 
-.user-column * {
-  color:#313131!important;
+.custom-text.inner {
+  font-size:20px
 }
-
-.btn * {
-  color: white!important; 
-}
-

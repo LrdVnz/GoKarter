@@ -248,10 +248,10 @@ const Leaderboard = () => {
                   {userObj.laps.map((lap, a) => (
                     <Form onSubmit={handleDeleteLap}>
                       <Form.Group>
-                        <MDBListGroupItem>{lap.time}</MDBListGroupItem>
+                        <MDBListGroupItem className="custom-text inner">{lap.time}</MDBListGroupItem>
                         {userObj.user._id == currentUser._id && (
                           <Form.Group>
-                            <MDBBtn type="submit" className="btn-custom">
+                            <MDBBtn type="submit" className="btn-custom laps">
                               delete lap
                             </MDBBtn>
                             <Form.Control controlId="lap-delete-id" type="input" disabled style={{display:"none"}} value={lap._id}/>
@@ -265,7 +265,7 @@ const Leaderboard = () => {
                       {userObj.user._id == currentUser._id && (
                         <Form.Group>
                           <Form.Control controlId="lap-time" type="input"  />
-                          <MDBBtn type="submit" className="btn-custom">
+                          <MDBBtn type="submit" className="btn-custom laps">
                             Add Lap Time
                           </MDBBtn>
                         </Form.Group>

@@ -15,10 +15,10 @@ const User = ({ name, email, avatar }) => {
       <MDBCardImage variant="top" src={avatar} className="user-img" />
       </div>
       <MDBCardBody>
-        <MDBCardText>{name}</MDBCardText>
+        <MDBCardText className="custom-text inner">{name}</MDBCardText>
       </MDBCardBody>
       <MDBCardFooter >
-        <MDBCardText> {email} </MDBCardText>
+        <MDBCardText className="custom-text inner"> {email} </MDBCardText>
       </MDBCardFooter>
     </MDBCard>
   );

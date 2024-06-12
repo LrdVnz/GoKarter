@@ -6,11 +6,10 @@ import { CurrentUserContext } from "../../contexts/currentUserContext";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext)
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const handleGoogleAuth = (event) => {
-  
-   // event.preventDefault()
+    // event.preventDefault()
 
     const str = `${process.env.REACT_APP_BACKEND_URL}/user/googleLogin`;
     window.open(str, "_self");
@@ -25,13 +24,16 @@ export default function Login() {
     });
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: loginData,
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: loginData,
+        }
+      );
 
       const json = await res.json();
       console.log(json);
@@ -39,7 +41,7 @@ export default function Login() {
       const currentUser = JSON.stringify(json.user);
       localStorage.setItem("accessToken", authToken);
       localStorage.setItem("currentUser", currentUser);
-      setCurrentUser(JSON.parse(currentUser))
+      setCurrentUser(JSON.parse(currentUser));
       navigate("/");
     } catch (err) {
       alert("error. Check if username and password are correct");
@@ -53,23 +55,30 @@ export default function Login() {
       </h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="input-username">
-          <Form.Label> Username </Form.Label>
+          <Form.Label className="custom-text inner"> Username </Form.Label>
           <Form.Control type="text" />
         </Form.Group>
         <Form.Group controlId="input-password">
-          <Form.Label> Password </Form.Label>
+          <Form.Label className="custom-text inner"> Password </Form.Label>
           <Form.Control type="password" />
         </Form.Group>
         <Form.Group className="d-flex mt-3 justify-content-center">
-          <Button type="submit" size="lg" variant="dark">
-           
+          <Button
+            type="submit"
+            size="lg"
+            variant="dark"
+            className="btn-custom button-text"
+          >
             Invia
           </Button>
         </Form.Group>
       </Form>
       <Form.Group>
-        <Button onClick={handleGoogleAuth}>Accedi con Google</Button>
-        </Form.Group>
+        <Button onClick={handleGoogleAuth} className="button-text">
+          Accedi con Google
+        <i class="fa-brands fa-google" style={{paddingLeft:"10px"}}></i>
+        </Button>
+      </Form.Group>
     </Container>
   );
 }
