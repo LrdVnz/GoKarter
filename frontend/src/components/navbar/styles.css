@@ -24,3 +24,11 @@
 .bg-custom {
   background-color: #bd3030;
 }
+
+.button-text {
+  font-size: 18px!important; 
+}
+
+.button-text-large {
+  font-size: 22px!important; 
+}

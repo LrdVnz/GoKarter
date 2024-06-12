@@ -44,8 +44,8 @@ const Frontpage = (props) => {
   }
 
   return (
-    <Row className="main p-3">
-      <h2>Races:</h2>
+    <Row className="main p-3 custom-bg">
+      <h2 className="custom-text">Races:</h2>
       {!races && !isError && <p> loading </p>}
 
       {isError && <h2>401 unauthorized. Please log in</h2>}
@@ -63,11 +63,13 @@ const Frontpage = (props) => {
                 marginBottom: 50,
               }}
             >
-              <MDBCardBody>
+              <MDBCardBody
+              className="custom-bg"
+              >
                 {/* To do : put the race in a card */}
                 {/* Race item is clickable and bring you to the race. */}
-                <MDBCardTitle>{race.date}</MDBCardTitle>
-                <MDBCardText> partecipants :</MDBCardText>
+                <MDBCardTitle className="custom-text">{race.date}</MDBCardTitle>
+                <MDBCardText className="custom-text"> partecipants :</MDBCardText>
                 <MDBListGroup>
                   {race.users.map((user, a) => (
                     /* per accedere al nome : user[0].user.name */

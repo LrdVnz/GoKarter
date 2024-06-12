@@ -51,14 +51,16 @@ const NavBar = (props) => {
   }
 
   return (
-    <Navbar expand="lg" className="blog-navbar" fixed="top">
+    <Navbar expand="lg" className="blog-navbar custom-bg" fixed="top">
       <Container className="justify-content-between">
         <Navbar.Brand as={Link} to="/">
-          <h2 style={{color:"#bd3030"}}>GoKarter</h2>
+          <h2 style={{color:"#bd3030", fontSize:"40px"}}>GoKarter</h2>
+          <img src="https://res.cloudinary.com/dogunqggs/image/upload/v1718090536/goKarterIcon-nobg-red_apgizm.png" alt="goKarter icon" 
+          style={{width:"80px"}}/>
         </Navbar.Brand>
         {currentUser && (
           <Button
-            className="blog-navbar-add-button bg-custom"
+            className="blog-navbar-add-button bg-custom button-text-large"
             size="lg"
             onClick={() => newRace()}
           >
@@ -80,7 +82,7 @@ const NavBar = (props) => {
         <Navbar.Brand className="d-flex align-items-center">
           {currentUser && (
             <>
-              <p className="fs-5 ms-2 me-2 mb-0">{currentUser.name}</p>
+              <p className="fs-5 ms-2 me-2 mb-0 button-text-large">{currentUser.name}</p>
               <img
                 onError={handleImgError}
                 src={currentUser.avatar}
@@ -98,16 +100,16 @@ const NavBar = (props) => {
         </Navbar.Brand>
         {currentUser == null && (
           <>
-            <Button as={Link} to="/login" className="bg-dark m-1" size="lg">
+            <Button as={Link} to="/login" className="bg-dark m-1 button-text" size="lg">
               Login
             </Button>
-            <Button as={Link} to="/register" className="bg-dark m-1" size="lg">
+            <Button as={Link} to="/register" className="bg-dark m-1 button-text" size="lg">
               Register
             </Button>
           </>
         )}
         {currentUser && (
-          <Button onClick={() => handleLogout()} className="bg-custom" size="lg">
+          <Button onClick={() => handleLogout()} className="bg-custom button-text" size="lg">
             Logout
           </Button>
         )}
