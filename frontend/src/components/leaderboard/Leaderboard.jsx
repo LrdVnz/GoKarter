@@ -249,6 +249,7 @@ const Leaderboard = () => {
                     <Form onSubmit={handleDeleteLap}>
                       <Form.Group>
                         <MDBListGroupItem className="custom-text inner">{lap.time}</MDBListGroupItem>
+                      {/* Rovina tutto il design della leaderboard.  
                         {userObj.user._id == currentUser._id && (
                           <Form.Group>
                             <MDBBtn type="submit" className="btn-custom laps">
@@ -256,7 +257,7 @@ const Leaderboard = () => {
                             </MDBBtn>
                             <Form.Control controlId="lap-delete-id" type="input" disabled style={{display:"none"}} value={lap._id}/>
                           </Form.Group>
-                        )}
+                        )} */}
                       </Form.Group>
                     </Form>
                   ))}

@@ -34,23 +34,23 @@ export default function Login() {
       <h1 className="blog-main-title">Registrati: </h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="input-name">
-          <Form.Label> Name </Form.Label>
+          <Form.Label className="custom-text inner"> Name </Form.Label>
           <Form.Control type="text" />
         </Form.Group>
         <Form.Group controlId="input-email">
-          <Form.Label> Email </Form.Label>
+          <Form.Label className="custom-text inner"> Email </Form.Label>
           <Form.Control type="email" />
         </Form.Group>
         <Form.Group controlId="input-password">
-          <Form.Label> Password </Form.Label>
+          <Form.Label className="custom-text inner"> Password </Form.Label>
           <Form.Control type="password" />
         </Form.Group>
         <Form.Group controlId="input-avatar">
-          <Form.Label> Carica il tuo avatar : </Form.Label>
+          <Form.Label className="custom-text inner"> Carica il tuo avatar : </Form.Label>
           <Form.Control type="file" />
         </Form.Group>
         <Form.Group className="d-flex mt-3 justify-content-center">
-          <Button type="submit" size="lg" variant="dark">
+          <Button type="submit" size="lg" variant="dark" className="btn-custom button-text">
             invia
           </Button>
         </Form.Group>
